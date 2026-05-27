@@ -8,6 +8,8 @@ import com.challenge.notification.repository.NotificationLogRepository;
 import com.challenge.notification.repository.UserRepository;
 import com.challenge.notification.strategy.NotificationStrategy;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,5 +61,9 @@ public class NotificationService {
 
     public List<NotificationLog> getHistory() {
         return logRepository.findAllByOrderByTimestampDesc();
+    }
+
+    public Page<NotificationLog> getHistory(Pageable pageable) {
+        return logRepository.findAllByOrderByTimestampDesc(pageable);
     }
 }
